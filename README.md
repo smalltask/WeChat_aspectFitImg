@@ -1,3 +1,4 @@
+```
 /**
  * imgSourceWidth,imgSourceHeight : 图片的原始高度；
  * fitWidth,fitHeight: 图片保持比例缩放后，要能够塞进这个大小范围内；
@@ -23,3 +24,4 @@ function aspectFitImg(imgSourceWidth, imgSourceHeight, fitWidth, fitHeight) {
     return this.aspectFitImg(imgSourceWidth, imgSourceWidth, fitWidth, fitHeight);
   }
 }
+```
