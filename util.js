@@ -39,3 +39,44 @@ function aspectFitImg(imgSourceWidth, imgSourceHeight, fitWidth, fitHeight) {
     return this.aspectFitImg(imgSourceWidth, imgSourceWidth, fitWidth, fitHeight);
   }
 }
+
+/**
+ * 返回一个json层级下的节点内容
+ * root ： 要被读取的json节点的root节点
+ * jsonStr ： 要被读取的节点的字符串形式
+ * defaultValue : 如果要被读取的节点不存在或为空，则返回该值
+ * 
+ *  // demo
+ *  var jsonStr = '{"res":{"data":null}}';
+ *  var jsonRoot = JSON.parse(jsonStr);
+ *  var str = utils.jsonObj(jsonRoot,"res.data.userInfo.card.name",undefined);
+ */
+function jsonObj(root, jsonStr, defaultValue) {
+  if (!root) {
+    return defaultValue;
+  } else {
+    try {
+      var nodeNameArray = jsonStr.split('.');
+      var tmpRoot = root;
+      var i = 0;
+      for (var i = 0; i < nodeNameArray.length; i++) {
+        var tmpNodeName = nodeNameArray[i];
+        var tmpNode = tmpRoot[tmpNodeName];
+        if (tmpNode) {
+          // console.log("." + tmpNodeName);
+          tmpRoot = tmpNode;
+        } else {
+          //发生异常了
+          console.log("解析失败," + jsonStr + " 的值为：" + defaultValue);
+          return defaultValue;
+        }
+      }
+      //解析完成,tmpRoot即为所求
+      console.log(jsonStr + " 的值为：" + tmpNode);
+      return tmpNode;
+    } catch (e) {
+      console.log("try catch." + e);
+      return defaultValue;
+    }
+  }
+}
